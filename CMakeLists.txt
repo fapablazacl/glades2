@@ -1,6 +1,8 @@
 
 cmake_minimum_required(VERSION 3.0)
 
+set (CMAKE_DEBUG_POSTFIX "d")
+
 project (glades2)
 
 # Target Definition
@@ -21,10 +23,6 @@ target_include_directories(${target} PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
-
-#target_include_directories(${target} PUBLIC "include/")
-
-target_link_libraries (${target} khr)
 
 # Package Config Version Section
 include(CMakePackageConfigHelpers)

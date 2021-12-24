@@ -34,25 +34,41 @@ write_basic_package_version_file(
 )
 
 # Install 
-install(TARGETS glades2
+install(
+    TARGETS glades2
     EXPORT glades2Targets
-    LIBRARY DESTINATION lib COMPONENT Runtime
-    ARCHIVE DESTINATION lib COMPONENT Development
-    RUNTIME DESTINATION bin COMPONENT Runtime
-    PUBLIC_HEADER DESTINATION include COMPONENT Development
-    BUNDLE DESTINATION bin COMPONENT Runtime
+    
+    LIBRARY         DESTINATION lib     COMPONENT Runtime
+    ARCHIVE         DESTINATION lib     COMPONENT Development
+    RUNTIME         DESTINATION bin     COMPONENT Runtime
+    PUBLIC_HEADER   DESTINATION include COMPONENT Development
+    BUNDLE          DESTINATION bin     COMPONENT Runtime
 )
 
 # Package Configuration
 include(CMakePackageConfigHelpers)
+
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/glades2Config.cmake.in"
     "${PROJECT_BINARY_DIR}/glades2Config.cmake"
-    INSTALL_DESTINATION lib/cmake/glades2
+    
+    INSTALL_DESTINATION "lib/cmake/glades2"
 )
 
-install(EXPORT glades2Targets DESTINATION lib/cmake/glades2)
-install(FILES "${PROJECT_BINARY_DIR}/glades2ConfigVersion.cmake"
-              "${PROJECT_BINARY_DIR}/glades2Config.cmake"
-        DESTINATION lib/cmake/glades2)
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)
+
+install(
+    EXPORT glades2Targets 
+    DESTINATION "lib/cmake/glades2")
+
+# Install Helper Files
+install(
+    FILES 
+        "${PROJECT_BINARY_DIR}/glades2ConfigVersion.cmake"
+        "${PROJECT_BINARY_DIR}/glades2Config.cmake"
+
+    DESTINATION "lib/cmake/glades2")
+
+# Install Header Files
+install(
+    DIRECTORY "${PROJECT_SOURCE_DIR}/include/" 
+    DESTINATION "include")
